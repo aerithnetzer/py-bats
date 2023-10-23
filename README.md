@@ -25,5 +25,6 @@ What is left to do in this project.
 - [x] Add metadata to the markdown file
 - [x] Split references into a txt file
 - [x] Call GPT to convert the references to BibTeX
-- [ ] Add the BibTeX references to the markdown file
+- [x] Add the BibTeX references to the markdown file
 - [ ] Produce JATSXML file from the markdown file
+- [ ] Parse author information and add to metadata section
