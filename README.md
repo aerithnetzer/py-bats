@@ -19,4 +19,11 @@ This will create a markdown file from the docx file. The markdown file will be s
 
 You will also find a .txt file that contains the references in plaintext. We want to convert all of the citations to biblatex format. Use copilot, GPT, or zotero, as you wish. Make sure you change the file extension to ```.bib``` when you are done.
 
-## Markdown to JATSXML
+
+What is left to do in this project.
+- [x] Automate the docx > markdown conversion
+- [x] Add metadata to the markdown file
+- [x] Split references into a txt file
+- [x] Call GPT to convert the references to BibTeX
+- [ ] Add the BibTeX references to the markdown file
+- [ ] Produce JATSXML file from the markdown file
