@@ -40,5 +40,5 @@ def ref_in_article(input_dir):
             f.write(index_body)           
             print("References written to " + index_file + "")
 
-input_dir = input('Enter the path to the directory containing the .md files:')
+input_dir = os.getcwd() + '/production'
 ref_in_article(input_dir)

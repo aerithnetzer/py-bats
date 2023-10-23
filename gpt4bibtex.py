@@ -21,20 +21,20 @@ frequency_penalty = 0.5
 presence_penalty = 0.0
 # get content of file
 
-def get_input_content():
-    input_path = input('Enter the path to the file containing the plaintext citations: ')
+def get_input_content(input_path):
     with open(input_path, 'r') as f:
         content = f.read()
     chunks = content.split('\n')
+    print(len(chunks))
     return chunks, input_path
 
 def call_gpt(content_chunks):
     responses = []
     for chunk in content_chunks:
-    
+        print(f"\n\n\nInput: {chunk}")
         completion = openai.ChatCompletion.create(
             engine="nul-general-gpt35",
-            messages=[{"role": "user", "content": chunk},
+            messages=[{"role": "user", "content": str(chunk)},
                       {"role": "system", "content": "You are an AI that converts plaintext citations to biblatex. Only respond with code in plain text."}],
             temperature=temperature,
             max_tokens=max_tokens,
@@ -46,7 +46,7 @@ def call_gpt(content_chunks):
         response = completion.choices[0].message.content
         print(response)
         responses.append(response)
-        print("")
+        print("\n\n")
         print(responses)
 
     return responses
@@ -60,9 +60,17 @@ def write_bib_file(responses, input_file_path):
             f.write('\n')
     print(f"Responses saved to {output_file_path}")
 
+import os
+
 def gpt4bibtex():
-    content_chunks, input_file_path = get_input_content()
-    responses = call_gpt(content_chunks)
-    write_bib_file(responses, input_file_path)
+    for root, dirs, files in os.walk(os.getcwd() + '/production'):
+        for file in files:
+            if file.endswith('.txt'):
+                input_file_path = os.path.join(root, file)
+                chunks, input_path = get_input_content(input_file_path)
+                responses = call_gpt(chunks)
+                write_bib_file(responses, input_file_path)
+
+# Call gpt4bibtex() for every .txt file within the production directory and its subdirectories
 
 gpt4bibtex()

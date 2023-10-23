@@ -34,7 +34,7 @@ def mdrefs2txt(input_dir):
 
 # Write the content of utils/article_metadata.yaml to the head of the markdown file
 def write_yaml_file(input_dir):
-    yamlfile = os.path.join(os.getcwd(), 'utils/article_metadata.yaml')
+    yamlfile = os.path.join(os.getcwd(), 'utils/article-metadata.yaml')
     for root, _, files in os.walk(input_dir):
         for file in files:
             if file.endswith(".md"):
