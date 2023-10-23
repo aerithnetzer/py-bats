@@ -1,0 +1,35 @@
+---
+weight: 
+title: ''
+subtitle: ''
+article:
+    type: research-article # book-review, brief-report, research-article
+    doi: ''
+    heading: '' # Original Article, Brief Report, Book Review
+    volume: ''
+    issue: ''
+    fpage: 
+    lpage: 
+    filename: ''
+author:
+    -   orcid: 
+        surname: ''
+        given_name: ''
+        name: '' # First Name Last Name
+        email: ''
+        affiliation: 
+            organization: ''
+            department: ''
+            isni: ''
+            ror: '' # info available at https://ror.org/
+            bio: |
+                
+_date:
+    day: ''
+    month: ''
+    year: ''
+abstract: |
+    
+tags:
+    - 
+---

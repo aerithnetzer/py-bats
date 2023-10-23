@@ -1,0 +1,137 @@
+% THIS IS AN ATTEMPT TO CREATE A CONTEXT TEMPLATE FOR BATS PDFS
+% THIS HAS NOT BE USED AND WAS NOT FINISHED
+% BATS EDITORS MAKE THEIR OWN PDFS USING ADOBE INDESIGN
+%
+% Style Variables
+\definecolor[colorLink][x=$linkcolor$]
+
+% Enable hyperlinks
+\setupinteraction
+  [state=start,
+$if(title)$
+  title={$title$},
+$endif$
+$if(subtitle)$
+  subtitle={$subtitle$},
+$endif$
+$if(author)$
+  author={$for(author)$$author.given-names$ $author.surname$$sep$; $endfor$},
+$endif$
+$if(keywords)$
+  keyword={$for(keywords)$$keywords$$sep$; $endfor$},
+$endif$
+  style=$linkstyle$,
+  color=colorLink,
+  contrastcolor=$linkcontrastcolor$]
+
+% make chapter, section bookmarks visible when opening document
+\placebookmarks[chapter, section, subsection, subsubsection, subsubsubsection, subsubsubsubsection][chapter, section]
+\setupinteractionscreen[option=bookmark]
+
+\setuppagenumbering[location={footer,marginedge}]
+\setuphead[section, subsection, subsubsection, subsubsubsection, subsubsubsubsection][number=no,style=\ss\bf]
+
+\setupbodyfontenvironment[default][em=italic] % use italic as em, not slanted
+
+\definefallbackfamily[mainface][rm][CMU Serif][preset=range:greek, force=yes]
+\definefontfamily[mainface][rm][$if(mainfont)$$mainfont$$else$Latin Modern Roman$endif$]
+\definefontfamily[mainface][mm][$if(mathfont)$$mathfont$$else$Latin Modern Math$endif$]
+\definefontfamily[mainface][ss][$if(sansfont)$$sansfont$$else$Latin Modern Sans$endif$]
+\definefontfamily[mainface][tt][$if(monofont)$$monofont$$else$Latin Modern Typewriter$endif$][features=none]
+\setupbodyfont[mainface$if(fontsize)$,$fontsize$$endif$]
+
+\setuphead[title][page=no,
+    textstyle=\bf\ss,
+    align=flushleft,
+    indentnext=no]
+
+\setupheader[state=empty,page=no]
+\setupheadertexts[][$title$][][$for(author)$$author.surname$$sep$ $endfor$]
+
+\definestartstop[articletype][style=\ss,
+    after=\nowhitespace\hairline]
+
+\definestartstop[abstract]
+    [before={\startnarrower[2*middle]},
+    after={\stopnarrower\blank[big]},
+    style=\tfx]
+
+\setupwhitespace[line]
+
+\setupfooter[style=\tfx]
+\setupfootertexts[\copyright $year$ The Author(s)][\bf Bulletin of Applied Transgender Studies 1(1)]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% start pandoc template %
+\definedescription
+  [description]
+  [headstyle=bold, style=normal, location=hanging, width=broad, margin=1cm, alternative=hanging]
+
+\setupitemize[autointro]    % prevent orphan list intro
+\setupitemize[indentnext=no]
+
+\defineitemgroup[enumerate]
+\setupenumerate[each][fit][itemalign=left,distance=.5em,style={\feature[+][default:tnum]}]
+
+\setupfloat[figure][default={here,nonumber}]
+\setupfloat[table][default={here,nonumber}]
+
+\setupxtable[frame=off]
+\setupxtable[head][topframe=on,bottomframe=on]
+\setupxtable[body][]
+\setupxtable[foot][bottomframe=on]
+
+$if(csl-refs)$
+\definemeasure[cslhangindent][1.5em]
+\definenarrower[hangingreferences][left=\measure{cslhangindent}]
+\definestartstop [cslreferences] [
+    $if(csl-hanging-indent)$
+    before={%
+      \starthangingreferences[left]
+      \setupindenting[-\leftskip,yes,first]
+      \doindentation
+      },
+      after=\stophangingreferences,
+    $endif$
+]
+$endif$
+
+% end pandoc template %
+
+\starttext
+
+\startarticletype
+    \WORDS{$article-type$}
+\stoparticletype
+
+\title{$title$$if(subtitle)$: $subtitle$$endif$}
+\stopalignment
+
+$for(author)$
+\bold{$author.given-names$ $author.surname$} $if(author.email)$($author.email$) $endif$$author.affiliation$ \blank
+$endfor$
+
+\startabstract
+    $abstract$ \blank
+\stopabstract
+
+\bold{Keywords} $for(keywords)$$keywords$$sep$, $endfor$ \blank
+
+$body$
+
+\stoptext
