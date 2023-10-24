@@ -33,21 +33,8 @@ def mdrefs2txt(input_dir):
 
 
 # Write the content of utils/article_metadata.yaml to the head of the markdown file
-def write_yaml_file(input_dir):
-    yamlfile = os.path.join(os.getcwd(), 'utils/article-metadata.yaml')
-    for root, _, files in os.walk(input_dir):
-        for file in files:
-            if file.endswith(".md"):
-                mdfile = os.path.join(root, file)
-                print("Writing yaml to " + mdfile + "")
-                with open(yamlfile, 'r') as f:
-                    data = f.read()
-                with open(mdfile, 'r') as f:
-                    data2 = f.read()
-                with open(mdfile, 'w') as f:
-                    f.write(data + "\n" + "---" + "\n" + data2)
 
-input_dir = input('Enter the path to the directory containing the docx files:')
+input_dir = os.path.join(os.getcwd(), 'production')
 
 def docx2ref(input_dir):
     for root, _, files in os.walk(input_dir):
@@ -58,14 +45,14 @@ def docx2ref(input_dir):
                 output_file = os.path.join(root, os.path.splitext(file)[0] + '.md')
 
                 # Convert docx to md
-                os.system(f"pandoc {input_file} --wrap none --output {output_file}")
+                os.system(f"pandoc {input_file} --wrap none -o {output_file}")
 
                 print(f"Converted {input_file} to {output_file}")
 
 def docx2bib():
     docx2ref(input_dir)
     mdrefs2txt(input_dir)
-    write_yaml_file(input_dir)
+
 
 docx2bib()
 

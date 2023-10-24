@@ -13,6 +13,6 @@ def cleanup(input_dir):
                 print("Removing " + file_to_remove)
                 os.remove(file_to_remove)
 
-input_dir = input('Enter the path to the directory containing the docx files:')
+input_dir = os.path.join(os.getcwd(), 'production')
 
 cleanup(input_dir)                
