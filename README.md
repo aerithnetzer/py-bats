@@ -1,4 +1,3 @@
-tbh this is jankey as hell but it works so whatever
 # py-bats
 
 ## Introduction
