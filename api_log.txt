@@ -1,0 +1,10 @@
+2023-12-13 12:08:43,528 - Entry type online not standard. Not considered.
+2023-12-13 12:08:43,710 - Title: Diagnostic and Statistical Manual of Mental Disorders: DSM-5, Author: American Psychiatric Association, DOI: 10.1176/appi.books.9780890423349
+2023-12-13 12:08:43,916 - Title: Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition, Text Revision (DSM-5-TR), Author: American Psychiatric Association, DOI: 10.1176/appi.books.9780890423349
+2023-12-13 12:08:44,203 - Title: The legacy of medicalising 'homosexuality': A discussion on the historical effects of non-heterosexual diagnostic classifications, Author: Anderson, J. and Holland, E., DOI: 10.7790/sa.v11i1.405
+2023-12-13 12:08:44,467 - Title: Beyond cisgenderism: Counselling people with non-assigned gender identities, Author: Ansara, Y. G., DOI: 10.4324/9781315574462-10
+2023-12-13 12:08:44,698 - Title: Cisgenderism in psychology: Pathologising and misgendering children from 1999 to 2008, Author: Ansara, Y. G. and Hegarty, P., DOI: 10.1080/19419899.2011.576696
+2023-12-13 12:08:44,999 - Title: Misgendering in English language contexts: Applying non-cisgenderist methods to feminist research, Author: Ansara, Y. G. and Hegarty, P., DOI: 10.5172/mra.2013.4010
+2023-12-13 12:08:45,220 - Title: Methodologies of misgendering: Recommendations for reducing cisgenderism in psychological research, Author: Ansara, Y. G. and Hegarty, P., DOI: 10.1177/0959353514526217
+2023-12-13 12:08:45,576 - Title: Homophobia, conversion therapy, and care models for trans youth: defending the gender-affirmative approach, Author: Ashley, F., DOI: 10.1080/19361653.2019.1665610
+2023-12-13 12:08:45,872 - Title: Banning Transgender Conversion Practices: A Legal and Policy Analysis, Author: Ashley, Fiona, DOI: 10.59962/9780774866941
