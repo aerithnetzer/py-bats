@@ -1,34 +1,40 @@
+import os
 import logging
-from habanero import Crossref
 import bibtexparser
+from habanero import Crossref
 
-def check_bib_entries(bib_file):
-    # Configure logging
-    logging.basicConfig(filename='api_log.txt', level=logging.INFO, format='%(asctime)s - %(message)s')
+def check_bib_entries(directory):
+    # Iterate over all files in the directory
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith('.bib'):
+                bib_file = os.path.join(root, file)
+                log_file = os.path.join(root, 'api_log.txt')  # New line
 
-    # Load the .bib file using bibtexparser
-    with open(bib_file, 'r') as f:
-        bib_database = bibtexparser.load(f)
+                # Configure logging
+                logging.basicConfig(filename=log_file, level=logging.INFO, format='%(asctime)s - %(message)s')  # Modified line
 
-    # Create a Crossref client
-    cr = Crossref()
+                # Load the .bib file using bibtexparser
+                with open(bib_file, 'r') as f:
+                    bib_database = bibtexparser.load(f)
 
-    # Iterate over all entries in the .bib file
-    for entry in bib_database.entries:
-        # Get the title and author of the entry
-        title = entry.get('title', '').replace('{', '').replace('}', '')
-        author = entry.get('author', '').replace('{', '').replace('}', '').replace('(', '').replace(')', '')
+                # Create a Crossref client
+                cr = Crossref()
 
-        # Search for the DOI using the title and author
-        results = cr.works(query=title, query_author=author)
-        if 'items' in results['message'] and len(results['message']['items']) > 0:
-            doi = results['message']['items'][0].get('DOI')
-            logging.info(f"Title: {title}, Author: {author}, DOI: {doi}")
-            print("Title: ", title)
-            print("Author: ", author)
-            print("DOI: ", doi)
-        else:
-            logging.info(f"No DOI found for title: {title}")
-            print("No DOI found for title: ", title)
+                # Iterate over all entries in the .bib file
+                for entry in bib_database.entries:
+                    # Get all elements in the entry
+                    elements = entry.values()
 
-check_bib_entries('/Users/aerith/warlock/py_bats/production/1/index.bib')
+                    # Search for the DOI using all elements
+                    results = cr.works(query=' '.join(elements))
+                    if 'items' in results['message'] and len(results['message']['items']) > 0:
+                        doi = results['message']['items'][0].get('DOI')
+                        logging.info(f"Elements: {elements}, DOI: {doi}")
+                        print("Elements: ", elements)
+                        print("DOI: ", doi)
+                    else:
+                        logging.info(f"No DOI found for elements: {elements}")
+                        print("No DOI found for elements: ", elements)
+
+check_bib_entries(os.getcwd())
