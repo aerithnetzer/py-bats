@@ -10,7 +10,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 # Set the API key
     
 # Set the temperature
-temperature = 0.7
+temperature = 0.0
 # Set the max tokens
 max_tokens = 500
 # Set the top p
@@ -28,26 +28,31 @@ def get_input_content(input_path):
     print(len(chunks))
     return chunks, input_path
 
+
 def call_gpt(content_chunks):
     responses = []
     for chunk in content_chunks:
-        print(f"\n\n\nInput: {chunk}")
-        completion = openai.ChatCompletion.create(
-            engine="nul-general-gpt35",
-            messages=[{"role": "user", "content": str(chunk)},
-                      {"role": "system", "content": "You are an AI that converts plaintext citations to biblatex. Only respond with code in plain text."}],
-            temperature=temperature,
-            max_tokens=max_tokens,
-            top_p=top_p,
-            frequency_penalty=frequency_penalty,
-            presence_penalty=presence_penalty,
-            stop=["\n\n"],
-        )
-        response = completion.choices[0].message.content
-        print(response)
-        responses.append(response)
-        print("\n\n")
-        print(responses)
+        try:
+            print(f"\n\n\nInput: {chunk}")
+            completion = openai.ChatCompletion.create(
+                engine="nul-general-gpt35",
+                messages=[{"role": "user", "content": str(chunk)},
+                          {"role": "system", "content": "You are an AI that converts plaintext citations to biblatex. Only respond with code in plain text."}],
+                temperature=temperature,
+                max_tokens=max_tokens,
+                top_p=top_p,
+                frequency_penalty=frequency_penalty,
+                presence_penalty=presence_penalty,
+                stop=["\n}"],
+            )
+            response = completion.choices[0].message.content + "\n}"
+            print(response)
+            responses.append(response)
+            print("\n\n")
+            print(responses)
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            continue
 
     return responses
 
@@ -70,6 +75,16 @@ def gpt4bibtex():
                 chunks, input_path = get_input_content(input_file_path)
                 responses = call_gpt(chunks)
                 write_bib_file(responses, input_file_path)
+                write_api_log(responses, input_file_path)  # Write responses to API log
+
+def write_api_log(responses, input_file_path):
+    log_file_path = os.path.splitext(input_file_path)[0] + '_api.log'
+    with open(log_file_path, 'w') as f:
+        for response in responses:
+            f.write(response)
+            f.write('\n')
+    print(f"API log saved to {log_file_path}")
+
 
 # Call gpt4bibtex() for every .txt file within the production directory and its subdirectories
 
