@@ -3,7 +3,7 @@ import os
 
 def bib2md():
     '''This function handles transforming the .bib file to markdown using pypandoc'''
-    for root, _, files in os.walk(os.getcwd() + '/production'):
+    for root, _, files in os.walk(os.getcwd()):
         for file in files:
             if file.endswith(".bib"):
                 bibfile = os.path.join(root, file)
@@ -30,4 +30,4 @@ def concatenate_yaml_file(input_dir):
                     f.write("\n".join(data + data2) + "\n" + content)
 
 bib2md()
-concatenate_yaml_file(os.getcwd() + '/production')
+concatenate_yaml_file(os.getcwd())
