@@ -32,7 +32,7 @@ def check_bib_entries(directory):
                         doi = results['message']['items'][0].get('DOI')
                         logging.info(f"Elements: {elements}, DOI: {doi}")
                         print("Elements: ", elements)
-                        print("DOI: ", doi)
+                        print("\nDOI: ", doi)
                     else:
                         logging.info(f"No DOI found for elements: {elements}")
                         print("No DOI found for elements: ", elements)
