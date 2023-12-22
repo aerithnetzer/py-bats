@@ -34,7 +34,7 @@ def mdrefs2txt(input_dir):
 
 # Write the content of utils/article_metadata.yaml to the head of the markdown file
 
-input_dir = os.path.join(os.getcwd(), 'production')
+input_dir = os.path.join(os.getcwd() + '/production')
 
 def docx2ref(input_dir):
     for root, _, files in os.walk(input_dir):
