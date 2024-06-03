@@ -1,3 +1,5 @@
+While this code works and is all well and good, it is very specific to our workflow. I am creating a manuscript preparation package at [this git repo](www.github.com/aerithnetzer/manus)
+
 # py-bats
 
 ## Introduction
